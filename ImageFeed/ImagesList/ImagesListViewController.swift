@@ -1,10 +1,3 @@
-//
-//  ViewController.swift
-//  ImageFeed
-//
-//  Created by Ксения  Тареева on 17.11.2022.
-//
-
 import UIKit
 
 class ImagesListViewController: UIViewController {
@@ -12,20 +5,19 @@ class ImagesListViewController: UIViewController {
     @IBOutlet private var tableView: UITableView!
     private var photosName = [String]()
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        photosName = Array (0..<20).map{"\($0)"}
-        //tableView.register(ImagesListCell.self, forCellReuseIdentifier: ImagesListCell.reuseIdentifier)
-        // Do any additional setup after loading the view.
-    }
-    
     private lazy var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateStyle = .long
         formatter.timeStyle = .none
         return formatter
     } ()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        photosName = Array (0..<20).map{"\($0)"}
+       
+    }
 
 
 }
@@ -57,7 +49,7 @@ extension ImagesListViewController {
         cell.cellImage.image = image
         cell.dateLabel.text = dateFormatter.string(from: Date())
         
-        let isLiked = indexPath.row % 2 == 0
+        let isLiked = indexPath.row % 2 != 0
         let likedImage = isLiked ? UIImage(named: "like_button_on") : UIImage(named: "like_button_off")
         cell.likeButton.setImage(likedImage, for: .normal)
                 
